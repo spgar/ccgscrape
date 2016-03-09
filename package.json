@@ -1,17 +1,17 @@
 {
-  "name"          : "scgscrape",
+    "name"          : "scgscrape",
     "version"     : "0.0.1",
     "description" : "Scrape SCG.",
     "main"        : "server.js",
     "author"      : "spgar",
     "license"     : "MIT",
     "repository"  : {
-      "type" : "git",
-      "url"  : "https://github.com/spgar/scgscrape.git"
+        "type" : "git",
+        "url"  : "https://github.com/spgar/scgscrape.git"
     },
     "dependencies" : {
-      "express" : "latest",
-      "request" : "latest",
-      "cheerio" : "latest"
+        "express" : "latest",
+        "request" : "latest",
+        "cheerio" : "latest"
     }
-  }
+}
