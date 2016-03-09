@@ -44,11 +44,9 @@ function addCard(cards, text, isSideboard) {
 }
 
 app.get('/scgscrape', function(req, res) {
-    url = 'http://sales.starcitygames.com//deckdatabase/displaydeck.php?DeckID=99447';
-
-    request(url, function(error, response, html) {
+    request(req.query.scgURL, function(error, response, html) {
         if (error) {
-            console.log(error);
+            throw error;
         } else {
             var $ = cheerio.load(html);
 
