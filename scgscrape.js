@@ -42,11 +42,10 @@ function addCard(cards, text, isSideboard) {
         cards.push(card);
     }
 }
-// Takes in a deckID and returns a JSON representation of the deck.
-app.get('/scgscrape', function(req, res) {
 
+function scrapeDeck(deckID, cb) {
     // Create the URL
-    var url = 'http://sales.starcitygames.com//deckdatabase/displaydeck.php?DeckID=' + req.query.deckID;
+    var url = 'http://sales.starcitygames.com//deckdatabase/displaydeck.php?DeckID=' + deckID;
 
     request(url, function(error, response, html) {
         if (error) {
@@ -99,8 +98,15 @@ app.get('/scgscrape', function(req, res) {
         json.place = place;
         json.cards = cards;
 
-        console.log(json);
-        res.json(json);
+        cb(json);
+    });
+}
+
+// Takes in a deckID and returns a JSON representation of the deck.
+app.get('/scgscrape', function(req, res) {
+    deckJSON = scrapeDeck(req.query.deckID, function(deckJSON) {
+        console.log(deckJSON);
+        res.json(deckJSON);
     });
 });
 
