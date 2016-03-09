@@ -42,59 +42,61 @@ function addCard(cards, text, isSideboard) {
         cards.push(card);
     }
 }
-
+// Takes in a SCG URL via ?scgURL and returns a JSON representation of the deck.
 app.get('/scgscrape', function(req, res) {
     request(req.query.scgURL, function(error, response, html) {
         if (error) {
             throw error;
-        } else {
-            var $ = cheerio.load(html);
-
-            var deckName, playerName, place;
-            var cards = [];
-            var json = { deckName: '', playerName: '', place: 0, cards: [] };
-
-            // Extract the deck title
-            $('.deck_title').filter(function() {
-                deckName = $(this).text();
-            });
-
-            // Extract the player's name
-            $('.player_name').filter(function() {
-                playerName = $(this).text();
-            });
-
-            // Extract the deck place
-            $('.deck_played_placed').filter(function() {
-                var data = $(this);
-                var placeText = data.text().match(/(\d)(st|nd|rd|th)\sPlace/);
-                if (placeText) {
-                    place = Number(placeText[1]);
-                }
-            });
-
-            // Add cards to the main deck
-            $('.cards_col1 li').each(function(i, e) {
-                addCard(cards, $(this).text(), false);
-            });
-            $('.cards_col2 > ul li').each(function(i, e) {
-                addCard(cards, $(this).text(), false);
-            });
-
-            // And the sideboard
-            $('.deck_sideboard li').each(function(i, e) {
-                addCard(cards, $(this).text(), true);
-            });
-
-            // Add all of this data to the json
-            json.deckName = deckName;
-            json.playerName = playerName;
-            json.place = place;
-            json.cards = cards;
-
-            console.log(json);
-            res.json(json);
         }
+        
+        var $ = cheerio.load(html);
+
+        var deckName, playerName, place;
+        var cards = [];
+        var json = { deckName: '', playerName: '', place: 0, cards: [] };
+
+        // Extract the deck title
+        $('.deck_title').filter(function() {
+            deckName = $(this).text();
+        });
+
+        // Extract the player's name
+        $('.player_name').filter(function() {
+            playerName = $(this).text();
+        });
+
+        // Extract the deck place
+        $('.deck_played_placed').filter(function() {
+            var data = $(this);
+            var placeText = data.text().match(/(\d)(st|nd|rd|th)\sPlace/);
+            if (placeText) {
+                place = Number(placeText[1]);
+            } else {
+                throw new Error('Failed to extract deck place.');
+            }
+        });
+
+        // Add cards to the main deck
+        $('.cards_col1 li').each(function(i, e) {
+            addCard(cards, $(this).text(), false);
+        });
+        $('.cards_col2 > ul li').each(function(i, e) {
+            addCard(cards, $(this).text(), false);
+        });
+
+        // And the sideboard
+        $('.deck_sideboard li').each(function(i, e) {
+            addCard(cards, $(this).text(), true);
+        });
+
+        // Add everything to the json and then return
+        json.deckName = deckName;
+        json.playerName = playerName;
+        json.place = place;
+        json.cards = cards;
+
+        console.log(json);
+        res.json(json);
     });
 });
 
