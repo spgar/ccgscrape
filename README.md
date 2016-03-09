@@ -1,7 +1,6 @@
 # scgscrape
-Scrapes SCG decks into JSON.
 
-This is some NodeJS that will scrape a StarCityGames deck into JSON. Just pass in the deck id and get your JSON.
+This is some NodeJS that will scrape a StarCityGames deck into JSON. Just pass in the deck id and get your JSON returned.
 
 http://localhost:8081/scrapedeck/?id=97366
 
