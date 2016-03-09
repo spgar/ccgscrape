@@ -31,6 +31,7 @@ function addCard(cards, text, isSideboard) {
         }
     } else {
         var card = {};
+        card.name = name;
         if (isSideboard) {
             card.main = 0;
             card.side = quantity;
@@ -38,17 +39,20 @@ function addCard(cards, text, isSideboard) {
             card.main = quantity;
             card.side = 0;
         }
-        card.name = name;
         cards.push(card);
     }
 }
-// Takes in a SCG URL via ?scgURL and returns a JSON representation of the deck.
+// Takes in a deckID and returns a JSON representation of the deck.
 app.get('/scgscrape', function(req, res) {
-    request(req.query.scgURL, function(error, response, html) {
+
+    // Create the URL
+    var url = 'http://sales.starcitygames.com//deckdatabase/displaydeck.php?DeckID=' + req.query.deckID;
+
+    request(url, function(error, response, html) {
         if (error) {
             throw error;
         }
-        
+
         var $ = cheerio.load(html);
 
         var deckName, playerName, place;
