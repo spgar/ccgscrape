@@ -4,7 +4,7 @@ var app     = express();
 
 // Takes in a deckID and returns a JSON representation of the deck.
 app.get('/scrapedeck', function(req, res) {
-    deckJSON = scraper.scrapeDeck(req.query.deckID, function(deckJSON) {
+    deckJSON = scraper.scrapeDeck(req.query.id, function(deckJSON) {
         console.log(deckJSON);
         res.json(deckJSON);
     });
