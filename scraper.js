@@ -121,10 +121,7 @@ module.exports = {
             });
 
             // Add cards to the main deck
-            $('.cards_col1 li').each(function(i, e) {
-                addCard(cards, $(this).text(), false);
-            });
-            $('.cards_col2 > ul li').each(function(i, e) {
+            $('.cards_col1 li, .cards_col2 > ul li').each(function(i, e) {
                 addCard(cards, $(this).text(), false);
             });
 
