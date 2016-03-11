@@ -41,7 +41,42 @@ function addCard(cards, text, isSideboard) {
     }
 }
 
+function dateToURLStr(date) {
+    return  (date.getMonth() + 1) + '%2F' + date.getDate() + '%2F' + date.getFullYear();
+}
+
 module.exports = {
+    scrapeDeckIDs: function(startDate, endDate, cb) {
+        var url = 'http://sales.starcitygames.com//deckdatabase/deckshow.php?t%5BT3%5D=3&start=1&finish=8&order_1=finish&order_2=&limit=100&action=Show+Decks&p=1';
+        var startDateStr = '&start_date=' + dateToURLStr(startDate);
+        var endDateStr = '&end_date=' + dateToURLStr(endDate);
+        url = url + startDateStr + endDateStr;
+
+        request(url, function(error, response, html) {
+            if (error) {
+                throw error;
+            }
+
+            var $ = cheerio.load(html);
+
+            var decks = [];
+            var json = { decks: [] };
+
+            $('.deckdbbody > a, .deckdbbody2 > a').each(function(i, e) {
+                var link = $(this).attr('href');
+                if (link) {
+                    var linkMatch = link.match(/DeckID=(\d+)/);
+                    if (linkMatch) {
+                        decks.push(linkMatch[1]);
+                    }
+                }
+            });
+
+            json.decks = decks;
+            cb(json);
+        });
+    },
+
     scrapeDeck: function(deckID, cb) {
         // Create the URL
         var url = 'http://sales.starcitygames.com//deckdatabase/displaydeck.php?DeckID=' + deckID;
@@ -84,9 +119,6 @@ module.exports = {
                     throw new Error('Failed to extract date: ' + data.text());
                 }
             });
-
-            // Extract the date
-
 
             // Add cards to the main deck
             $('.cards_col1 li').each(function(i, e) {

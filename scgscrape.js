@@ -4,9 +4,24 @@ var app     = express();
 
 // Takes in a deckID and returns a JSON representation of the deck.
 app.get('/scrapedeck', function(req, res) {
-    deckJSON = scraper.scrapeDeck(req.query.id, function(deckJSON) {
+    scraper.scrapeDeck(req.query.id, function(deckJSON) {
         console.log(deckJSON);
         res.json(deckJSON);
+    });
+});
+
+function dateFromString(str) {
+    var dateStr = str.match(/(\d+)\/(\d+)\/(\d\d\d\d)/);
+    return new Date(dateStr[3], dateStr[1] - 1, dateStr[2]);
+}
+
+// Takes in a date range and scrapes a list of deckIDs within that range
+app.get('/scrapedeckids', function(req, res) {
+    var startDate = dateFromString(req.query.startDate);
+    var endDate = dateFromString(req.query.endDate);
+    scraper.scrapeDeckIDs(startDate, endDate, function(deckIDsJSON) {
+        console.log(deckIDsJSON);
+        res.json(deckIDsJSON);
     });
 });
 
