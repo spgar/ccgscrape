@@ -45,34 +45,62 @@ function dateToURLStr(date) {
     return  (date.getMonth() + 1) + '%2F' + date.getDate() + '%2F' + date.getFullYear();
 }
 
-module.exports = {
-    scrapeDeckIDs: function(startDate, endDate, cb) {
-        var url = 'http://sales.starcitygames.com//deckdatabase/deckshow.php?t%5BT3%5D=3&start=1&finish=8&order_1=finish&order_2=&limit=100&action=Show+Decks&p=1';
-        var startDateStr = '&start_date=' + dateToURLStr(startDate);
-        var endDateStr = '&end_date=' + dateToURLStr(endDate);
-        url = url + startDateStr + endDateStr;
+function getScrapeDeckIDsURL(startDate, endDate, iter) {
+    var url = 'http://sales.starcitygames.com//deckdatabase/deckshow.php?t%5BT3%5D=3&start=1&finish=8&order_1=finish&order_2=&limit=100&action=Show+Decks&p=1';
+    var startDateStr = '&start_date=' + dateToURLStr(startDate);
+    var endDateStr = '&end_date=' + dateToURLStr(endDate);
+    var startNumStr = '';
+    if (iter > 0) {
+        startNumStr = '&start_num=' + (iter * 100);
+    }
+    url = url + startDateStr + endDateStr + startNumStr;
+    return url;
+}
 
-        request(url, function(error, response, html) {
-            if (error) {
-                throw error;
+function processDeckIDPage(deckIDs, startDate, endDate, iter, finishedCB) {
+    var url = getScrapeDeckIDsURL(startDate, endDate, iter);
+
+    request(url, function(error, response, html) {
+        if (error) {
+            throw error;
+        }
+
+        var finished = false;
+        var $ = cheerio.load(html);
+
+        // Check to see if we've hit the end of the results.
+        $('.titletext').filter(function() {
+            if ($(this).text().indexOf('There were no decks matching that criteria.') !== -1) {
+                finished = true;
             }
+        });
 
-            var $ = cheerio.load(html);
-
-            var decks = [];
-            var json = { decks: [] };
-
+        if (finished) {
+            // All done.
+            finishedCB(deckIDs);
+        } else {
+            // Pull all of the deckIDs into our list.
             $('.deckdbbody > a, .deckdbbody2 > a').each(function(i, e) {
                 var link = $(this).attr('href');
                 if (link) {
                     var linkMatch = link.match(/DeckID=(\d+)/);
                     if (linkMatch) {
-                        decks.push(linkMatch[1]);
+                        deckIDs.push(linkMatch[1]);
                     }
                 }
             });
 
-            json.decks = decks;
+            // Process the next potential) page worth of results.
+            processDeckIDPage(deckIDs, startDate, endDate, iter + 1, finishedCB);
+        }
+    });
+}
+
+module.exports = {
+    scrapeDeckIDs: function(startDate, endDate, cb) {
+        var deckIDs = [];
+        processDeckIDPage(deckIDs, startDate, endDate, 0, function(deckIDs) {
+            var json = { deckIDs: deckIDs };
             cb(json);
         });
     },
