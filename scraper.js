@@ -53,9 +53,9 @@ module.exports = {
 
             var $ = cheerio.load(html);
 
-            var deckName, playerName, place;
+            var deckName, playerName, place, date;
             var cards = [];
-            var json = { deckName: '', playerName: '', place: 0, cards: [] };
+            var json = { deckName: '', playerName: '', date: new Date(), place: 0, cards: [] };
 
             // Extract the deck title
             $('.deck_title').filter(function() {
@@ -67,16 +67,26 @@ module.exports = {
                 playerName = $(this).text();
             });
 
-            // Extract the deck place
+            // Extract the deck place and date
             $('.deck_played_placed').filter(function() {
                 var data = $(this);
                 var placeText = data.text().match(/(\d)(st|nd|rd|th)\sPlace/);
                 if (placeText) {
                     place = Number(placeText[1]);
                 } else {
-                    throw new Error('Failed to extract deck place.');
+                    throw new Error('Failed to extract deck place: ' + data.text());
+                }
+
+                var dateText = data.text().match(/on\s(\d+)\/(\d+)\/(\d\d\d\d)/);
+                if (dateText) {
+                    date = new Date(dateText[3], dateText[1] - 1, dateText[2]);
+                } else {
+                    throw new Error('Failed to extract date: ' + data.text());
                 }
             });
+
+            // Extract the date
+
 
             // Add cards to the main deck
             $('.cards_col1 li').each(function(i, e) {
@@ -94,6 +104,7 @@ module.exports = {
             // Add everything to the json and then return
             json.deckName = deckName;
             json.playerName = playerName;
+            json.date = date;
             json.place = place;
             json.cards = cards;
 
