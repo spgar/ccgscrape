@@ -8,6 +8,7 @@ http://localhost:8081/scrapedeck/?id=97366
 
 Returns:
 
+```javascript
 {  
    "deckName":"U/B Tezzeret",
    "playerName":"Will Hutchins",
@@ -226,3 +227,4 @@ Returns:
       }
    ]
 }
+```
