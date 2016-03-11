@@ -90,13 +90,14 @@ function processDeckIDPage(deckIDs, startDate, endDate, iter, finishedCB) {
                 }
             });
 
-            // Process the next potential) page worth of results.
+            // Process the next (potential) page worth of results.
             processDeckIDPage(deckIDs, startDate, endDate, iter + 1, finishedCB);
         }
     });
 }
 
 module.exports = {
+    
     scrapeDeckIDs: function(startDate, endDate, cb) {
         var deckIDs = [];
         processDeckIDPage(deckIDs, startDate, endDate, 0, function(deckIDs) {
