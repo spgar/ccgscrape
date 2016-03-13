@@ -1,4 +1,5 @@
 var express = require('express');
+var mongodb = require('mongodb');
 var scraper = require('./scraper');
 var app     = express();
 
@@ -22,6 +23,20 @@ app.get('/scrapedeckids', function(req, res) {
     scraper.scrapeDeckIDs(startDate, endDate, function(deckIDsJSON) {
         console.log(deckIDsJSON);
         res.json(deckIDsJSON);
+    });
+});
+
+app.get('/generatedb', function(req, res) {
+    var MongoClient = mongodb.MongoClient;
+    var url = 'mongodb://localhost:27017/scgscrape';
+
+    MongoClient.connect(url, function (err, db) {
+        if (err) {
+            console.log('Unable to connect to the mongoDB server. Error:', err);
+        } else {
+            console.log('Connection established to: ', url);
+            db.close();
+        }
     });
 });
 
