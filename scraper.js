@@ -97,7 +97,7 @@ function processDeckIDPage(deckIDs, startDate, endDate, iter, finishedCB) {
 }
 
 module.exports = {
-    
+
     scrapeDeckIDs: function(startDate, endDate, cb) {
         var deckIDs = [];
         processDeckIDPage(deckIDs, startDate, endDate, 0, function(deckIDs) {
@@ -135,17 +135,17 @@ module.exports = {
             $('.deck_played_placed').filter(function() {
                 var data = $(this);
                 var placeText = data.text().match(/(\d)(st|nd|rd|th)\sPlace/);
-                if (placeText) {
-                    place = Number(placeText[1]);
-                } else {
+                if (!placeText) {
                     throw new Error('Failed to extract deck place: ' + data.text());
+                } else {
+                    place = Number(placeText[1]);
                 }
 
                 var dateText = data.text().match(/on\s(\d+)\/(\d+)\/(\d\d\d\d)/);
-                if (dateText) {
-                    date = new Date(dateText[3], dateText[1] - 1, dateText[2]);
-                } else {
+                if (!dateText) {
                     throw new Error('Failed to extract date: ' + data.text());
+                } else {
+                    date = new Date(dateText[3], dateText[1] - 1, dateText[2]);
                 }
             });
 
