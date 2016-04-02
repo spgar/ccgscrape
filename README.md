@@ -2,30 +2,8 @@
 
 This is some NodeJS that will scrape Magic: The Gathering deck information into JSON.
 
-### /scrapedeckids/
-/scrapedeckids/ takes in a date range and returns JSON of all top 8 Legacy decks within the date range. Should be more general, right?
-
-http://localhost:8081/scrapedeckids?startDate=12/17/2015&endDate=12/20/2015
-
-Returns:
-
-```javascript
-{  
-  "decks":[  
-    "96440",
-    "96429",
-    "96406",
-    "96422",
-    "96434",
-    "96442",
-    "96409",
-    "96446"
-  ]
-}
-```
-
-### /scrapedeck/
-/scrapedeck/ takes in a deck id and return JSON of the deck contents:
+### /scgscrapedeck/
+/scgscrapedeck/ takes in a deck id and return JSON of the deck contents:
 
 http://localhost:8081/scrapedeck/?id=97366
 
@@ -249,5 +227,27 @@ Returns:
          "side":1
       }
    ]
+}
+```
+
+### /scgscrapedeckids/
+/scgscrapedeckids/ takes in a date range and returns JSON of all top 8 Legacy decks within the date range. Should be more general, right?
+
+http://localhost:8081/scgscrapedeckids?startDate=12/17/2015&endDate=12/20/2015
+
+Returns:
+
+```javascript
+{  
+  "decks":[  
+    "96440",
+    "96429",
+    "96406",
+    "96422",
+    "96434",
+    "96442",
+    "96409",
+    "96446"
+  ]
 }
 ```
