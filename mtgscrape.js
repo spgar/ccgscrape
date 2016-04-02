@@ -4,7 +4,7 @@ var scraper = require('./scraper');
 var app     = express();
 
 // Takes in a deckID and returns a JSON representation of the deck.
-app.get('/scrapedeck', function(req, res) {
+app.get('/scgscrapedeck', function(req, res) {
     scraper.scrapeDeck(req.query.id, function(deckJSON) {
         console.log(deckJSON);
         res.json(deckJSON);
@@ -17,7 +17,7 @@ function dateFromString(str) {
 }
 
 // Takes in a date range and scrapes a list of deckIDs within that range
-app.get('/scrapedeckids', function(req, res) {
+app.get('/scgscrapedeckids', function(req, res) {
     var startDate = dateFromString(req.query.startDate);
     var endDate = dateFromString(req.query.endDate);
     scraper.scrapeDeckIDs(startDate, endDate, function(deckIDsJSON) {
