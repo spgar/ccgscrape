@@ -3,7 +3,7 @@
 This is some NodeJS that will scrape Magic: The Gathering deck information into JSON.
 
 ### /scgscrapedeck/
-/scgscrapedeck/ takes in a deck id and return JSON of the deck contents:
+/scgscrapedeck/ takes in a deck id from StarCityGames and returns JSON of the deck contents:
 
 http://localhost:8081/scrapedeck/?id=97366
 
