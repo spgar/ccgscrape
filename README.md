@@ -1,6 +1,6 @@
-# scgscrape
+# mtgscrape
 
-This is some NodeJS that will scrape StarCityGames deck information into JSON.
+This is some NodeJS that will scrape Magic: The Gathering deck information into JSON.
 
 ### /scrapedeckids/
 /scrapedeckids/ takes in a date range and returns JSON of all top 8 Legacy decks within the date range. Should be more general, right?
