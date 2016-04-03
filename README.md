@@ -231,7 +231,7 @@ Returns:
 ```
 
 ### /scgscrapedeckids/
-/scgscrapedeckids/ takes in a date range and returns JSON of all top 8 Legacy decks within the date range. Should be more general, right?
+/scgscrapedeckids/ takes in a date range and returns JSON of all top 8 Legacy decks from StarCityGames within the date range. Should be more general, right?
 
 http://localhost:8081/scgscrapedeckids?startDate=12/17/2015&endDate=12/20/2015
 
