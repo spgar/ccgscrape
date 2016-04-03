@@ -3,6 +3,9 @@
     "version"     : "0.0.1",
     "description" : "Scrape SCG.",
     "main"        : "server.js",
+    "scripts"     : {
+        "test" : "./node_modules/.bin/mocha --reporter spec"
+    },
     "author"      : "spgar",
     "license"     : "MIT",
     "repository"  : {
@@ -12,6 +15,8 @@
     "dependencies" : {
         "express" : "latest",
         "request" : "latest",
-        "cheerio" : "latest"
+        "cheerio" : "latest",
+        "mocha"   : "latest",
+        "chai"    : "latest"
     }
 }
