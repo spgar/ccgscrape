@@ -1,11 +1,10 @@
 var express = require('express');
-var mongodb = require('mongodb');
 var scraper = require('./scraper');
 var app     = express();
 
 // Takes in a deckID and returns a JSON representation of the deck.
 app.get('/scgscrapedeck', function(req, res) {
-    scraper.scrapeDeck(req.query.id, function(deckJSON) {
+    scraper.scrapeSCGDeck(req.query.id, function(deckJSON) {
         console.log(deckJSON);
         res.json(deckJSON);
     });
@@ -20,7 +19,7 @@ function dateFromString(str) {
 app.get('/scgscrapedeckids', function(req, res) {
     var startDate = dateFromString(req.query.startDate);
     var endDate = dateFromString(req.query.endDate);
-    scraper.scrapeDeckIDs(startDate, endDate, function(deckIDsJSON) {
+    scraper.scrapeSCGDeckIDs(startDate, endDate, function(deckIDsJSON) {
         console.log(deckIDsJSON);
         res.json(deckIDsJSON);
     });

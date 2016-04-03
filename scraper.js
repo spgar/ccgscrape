@@ -56,49 +56,51 @@ function processDeckIDPage(deckIDs, startDate, endDate, iter, finishedCB) {
     });
 }
 
+// Adds a card to cards. Card is raw text like this: '3 Underground Sea'
+var addCard = function(cards, text, isSideboard) {
+    var cardText = text.match(/(\d+)\s(.+)$/);
+    if (!cardText) {
+        throw new Error('Failed to parse card: ' + text);
+    }
+
+    var quantity = Number(cardText[1]);
+    var name = cardText[2];
+
+    // Two cases:
+    // - Updating a card that has already been added (exists in main and sideboard)
+    // - Adding a new card to cards
+    var findObj = cards.filter(function(obj) {
+        return obj.name === name;
+    })[0];
+    if (findObj) {
+        if ((isSideboard && findObj.side !== 0) || (!isSideboard && findObj.main !== 0)) {
+            throw new Error('Trying to add the same card twice: ' + name);
+        }
+
+        if (isSideboard) {
+            findObj.side = quantity;
+        } else {
+            findObj.main = quantity;
+        }
+    } else {
+        var card = {};
+        card.name = name;
+        if (isSideboard) {
+            card.main = 0;
+            card.side = quantity;
+        } else {
+            card.main = quantity;
+            card.side = 0;
+        }
+        cards.push(card);
+    }
+};
+
 module.exports = {
 
-    // Adds a card to cards. Card is raw text like this: '3 Underground Sea'
-    addCard: function(cards, text, isSideboard) {
-        var cardText = text.match(/(\d+)\s(.+)$/);
-        if (!cardText) {
-            throw new Error('Failed to parse card: ' + text);
-        }
+    addCard: addCard,
 
-        var quantity = Number(cardText[1]);
-        var name = cardText[2];
-
-        // Two cases:
-        // - Updating a card that has already been added (exists in main and sideboard)
-        // - Adding a new card to cards
-        var findObj = cards.filter(function(obj) {
-            return obj.name === name;
-        })[0];
-        if (findObj) {
-            if ((isSideboard && findObj.side !== 0) || (!isSideboard && findObj.main !== 0)) {
-                throw new Error('Trying to add the same card twice: ' + name);
-            }
-
-            if (isSideboard) {
-                findObj.side = quantity;
-            } else {
-                findObj.main = quantity;
-            }
-        } else {
-            var card = {};
-            card.name = name;
-            if (isSideboard) {
-                card.main = 0;
-                card.side = quantity;
-            } else {
-                card.main = quantity;
-                card.side = 0;
-            }
-            cards.push(card);
-        }
-    },
-
-    scrapeDeckIDs: function(startDate, endDate, cb) {
+    scrapeSCGDeckIDs: function(startDate, endDate, cb) {
         var deckIDs = [];
         processDeckIDPage(deckIDs, startDate, endDate, 0, function(deckIDs) {
             var json = { deckIDs: deckIDs };
@@ -106,7 +108,7 @@ module.exports = {
         });
     },
 
-    scrapeDeck: function(deckID, cb) {
+    scrapeSCGDeck: function(deckID, cb) {
         // Create the URL
         var url = 'http://sales.starcitygames.com//deckdatabase/displaydeck.php?DeckID=' + deckID;
 
