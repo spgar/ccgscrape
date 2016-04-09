@@ -1,5 +1,5 @@
 {
-    "name"          : "scgscrape",
+    "name"        : "scgscrape",
     "version"     : "0.0.1",
     "description" : "Scrape SCG.",
     "main"        : "server.js",
@@ -13,10 +13,11 @@
         "url"  : "https://github.com/spgar/scgscrape.git"
     },
     "dependencies" : {
-        "express" : "latest",
-        "request" : "latest",
-        "cheerio" : "latest",
-        "mocha"   : "latest",
-        "chai"    : "latest"
+        "express"  : "latest",
+        "request"  : "latest",
+        "cheerio"  : "latest",
+        "bluebird" : "latest",
+        "mocha"    : "latest",
+        "chai"     : "latest"
     }
 }

@@ -1,4 +1,4 @@
-var request = require('request');
+var request = require('bluebird').promisifyAll(require('request'), {multiArgs:true});
 var cheerio = require('cheerio');
 
 function dateToURLStr(date) {
@@ -20,40 +20,40 @@ function getScrapeDeckIDsURL(startDate, endDate, iter) {
 function processDeckIDPage(deckIDs, startDate, endDate, iter, finishedCB) {
     var url = getScrapeDeckIDsURL(startDate, endDate, iter);
 
-    request(url, function(error, response, html) {
-        if (error) {
-            throw error;
-        }
+    request.getAsync(url)
+        .spread(function (response, html) {
+            var finished = false;
+            var $ = cheerio.load(html);
 
-        var finished = false;
-        var $ = cheerio.load(html);
-
-        // Check to see if we've hit the end of the results.
-        $('.titletext').filter(function() {
-            if ($(this).text().indexOf('There were no decks matching that criteria.') !== -1) {
-                finished = true;
-            }
-        });
-
-        if (finished) {
-            // All done.
-            finishedCB(deckIDs);
-        } else {
-            // Pull all of the deckIDs into our list.
-            $('.deckdbbody > a, .deckdbbody2 > a').each(function(i, e) {
-                var link = $(this).attr('href');
-                if (link) {
-                    var linkMatch = link.match(/DeckID=(\d+)/);
-                    if (linkMatch) {
-                        deckIDs.push(linkMatch[1]);
-                    }
+            // Check to see if we've hit the end of the results.
+            $('.titletext').filter(function() {
+                if ($(this).text().indexOf('There were no decks matching that criteria.') !== -1) {
+                    finished = true;
                 }
             });
 
-            // Process the next (potential) page worth of results.
-            processDeckIDPage(deckIDs, startDate, endDate, iter + 1, finishedCB);
-        }
-    });
+            if (finished) {
+                // All done.
+                finishedCB(deckIDs);
+            } else {
+                // Pull all of the deckIDs into our list.
+                $('.deckdbbody > a, .deckdbbody2 > a').each(function(i, e) {
+                    var link = $(this).attr('href');
+                    if (link) {
+                        var linkMatch = link.match(/DeckID=(\d+)/);
+                        if (linkMatch) {
+                            deckIDs.push(linkMatch[1]);
+                        }
+                    }
+                });
+
+                // Process the next (potential) page worth of results.
+                processDeckIDPage(deckIDs, startDate, endDate, iter + 1, finishedCB);
+            }
+        })
+        .catch(function (err) {
+            throw err;
+        });
 }
 
 // Adds a card to cards. Card is raw text like this: '3 Underground Sea'
@@ -112,63 +112,63 @@ module.exports = {
         // Create the URL
         var url = 'http://sales.starcitygames.com//deckdatabase/displaydeck.php?DeckID=' + deckID;
 
-        request(url, function(error, response, html) {
-            if (error) {
+        request.getAsync(url)
+            .spread(function (response, html) {
+                var $ = cheerio.load(html);
+
+                var deckName, playerName, place, date;
+                var cards = [];
+                var json = { deckName: '', playerName: '', date: new Date(), place: 0, cards: [] };
+
+                // Extract the deck title
+                $('.deck_title').filter(function() {
+                    deckName = $(this).text();
+                });
+
+                // Extract the player's name
+                $('.player_name').filter(function() {
+                    playerName = $(this).text();
+                });
+
+                // Extract the deck place and date
+                $('.deck_played_placed').filter(function() {
+                    var data = $(this);
+                    var placeText = data.text().match(/(\d)(st|nd|rd|th)\sPlace/);
+                    if (!placeText) {
+                        throw new Error('Failed to extract deck place: ' + data.text());
+                    } else {
+                        place = Number(placeText[1]);
+                    }
+
+                    var dateText = data.text().match(/on\s(\d+)\/(\d+)\/(\d\d\d\d)/);
+                    if (!dateText) {
+                        throw new Error('Failed to extract date: ' + data.text());
+                    } else {
+                        date = new Date(dateText[3], dateText[1] - 1, dateText[2]);
+                    }
+                });
+
+                // Add cards to the main deck
+                $('.cards_col1 li, .cards_col2 > ul li').each(function(i, e) {
+                    addCard(cards, $(this).text(), false);
+                });
+
+                // And the sideboard
+                $('.deck_sideboard li').each(function(i, e) {
+                    addCard(cards, $(this).text(), true);
+                });
+
+                // Add everything to the json and then return
+                json.deckName = deckName;
+                json.playerName = playerName;
+                json.date = date;
+                json.place = place;
+                json.cards = cards;
+
+                cb(json);
+            })
+            .catch(function (error) {
                 throw error;
-            }
-
-            var $ = cheerio.load(html);
-
-            var deckName, playerName, place, date;
-            var cards = [];
-            var json = { deckName: '', playerName: '', date: new Date(), place: 0, cards: [] };
-
-            // Extract the deck title
-            $('.deck_title').filter(function() {
-                deckName = $(this).text();
             });
-
-            // Extract the player's name
-            $('.player_name').filter(function() {
-                playerName = $(this).text();
-            });
-
-            // Extract the deck place and date
-            $('.deck_played_placed').filter(function() {
-                var data = $(this);
-                var placeText = data.text().match(/(\d)(st|nd|rd|th)\sPlace/);
-                if (!placeText) {
-                    throw new Error('Failed to extract deck place: ' + data.text());
-                } else {
-                    place = Number(placeText[1]);
-                }
-
-                var dateText = data.text().match(/on\s(\d+)\/(\d+)\/(\d\d\d\d)/);
-                if (!dateText) {
-                    throw new Error('Failed to extract date: ' + data.text());
-                } else {
-                    date = new Date(dateText[3], dateText[1] - 1, dateText[2]);
-                }
-            });
-
-            // Add cards to the main deck
-            $('.cards_col1 li, .cards_col2 > ul li').each(function(i, e) {
-                addCard(cards, $(this).text(), false);
-            });
-
-            // And the sideboard
-            $('.deck_sideboard li').each(function(i, e) {
-                addCard(cards, $(this).text(), true);
-            });
-
-            // Add everything to the json and then return
-            json.deckName = deckName;
-            json.playerName = playerName;
-            json.date = date;
-            json.place = place;
-            json.cards = cards;
-
-            cb(json);
-        });
     }
 };
