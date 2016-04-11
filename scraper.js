@@ -116,6 +116,13 @@ module.exports = {
             .spread(function (response, html) {
                 var $ = cheerio.load(html);
 
+                $('.titletext').filter(function() {
+                    if ($(this).text() === 'That Is Not A Valid Deck ID' ||
+                        $(this).text() === 'That Deck Could Not Be Found') {
+                        throw new Error('Invalid DeckID');
+                    }
+                });
+
                 var deckName, playerName, place, date;
                 var cards = [];
                 var json = { deckName: '', playerName: '', date: new Date(), place: 0, cards: [] };
@@ -168,7 +175,7 @@ module.exports = {
                 cb(json);
             })
             .catch(function (error) {
-                throw error;
+                cb({});
             });
     }
 };

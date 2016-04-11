@@ -93,6 +93,13 @@ describe('Deck Scraper', function() {
                 done();
             });
         });
+
+        it('returns empty deck on invalid deck ID', function(done) {
+            scraper.scrapeSCGDeck(0, function(deckJSON) {
+                expect(deckJSON).to.deep.equal({});
+                done();
+            });
+        });
     });
 
     describe('Scrape SCG deck IDs', function() {
