@@ -1,5 +1,6 @@
 var expect  = require('chai').expect;
-var scraper = require('../scraper');
+var bluebird = require('bluebird');
+var scraper = bluebird.promisifyAll(require('../scraper'));
 
 describe('Deck Scraper', function() {
     describe('Add to deck', function() {
@@ -41,7 +42,8 @@ describe('Deck Scraper', function() {
 
     describe('Scrape SCG deck', function() {
         it('scrapes a complete deck', function(done) {
-            scraper.scrapeSCGDeck(97366, function(deckJSON) {
+            scraper.scrapeSCGDeckAsync(97366)
+            .then(function(deckJSON) {
                 expect(deckJSON.deckName).to.equal('U/B Tezzeret');
                 expect(deckJSON.playerName).to.equal('Will Hutchins');
                 expect(deckJSON.place).to.equal(6);
@@ -94,9 +96,10 @@ describe('Deck Scraper', function() {
             });
         });
 
-        it('returns empty deck on invalid deck ID', function(done) {
-            scraper.scrapeSCGDeck(0, function(deckJSON) {
-                expect(deckJSON).to.deep.equal({});
+        it('throws error on invalid deck ID', function(done) {
+            scraper.scrapeSCGDeckAsync(0)
+            .catch(function(error) {
+                expect(error.cause).to.deep.equal(new Error('Invalid DeckID'));
                 done();
             });
         });
@@ -106,7 +109,8 @@ describe('Deck Scraper', function() {
         it('scrapes deck IDs from a date range', function(done) {
             var startDate = new Date(2015, 11, 17);
             var endDate = new Date(2015, 11, 20);
-            scraper.scrapeSCGDeckIDs(startDate, endDate, function(deckIDsJSON) {
+            scraper.scrapeSCGDeckIDsAsync(startDate, endDate)
+            .then(function(deckIDsJSON) {
                 expect(deckIDsJSON.deckIDs).to.deep.equal([
                     '96440',
                     '96429',
