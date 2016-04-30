@@ -1,9 +1,9 @@
 # mtgscrape
 
-This is some NodeJS that will scrape Magic: The Gathering deck information into JSON.
+This is some NodeJS that will scrape CCG deck information into JSON.
 
 ### /scgscrapedeck/
-/scgscrapedeck/ takes in a deck id from StarCityGames and returns JSON of the deck contents:
+/scgscrapedeck/ takes in a Magic: The Gathering deck id from StarCityGames and returns JSON of the deck contents:
 
 http://localhost:8081/scgscrapedeck/?id=97366
 
