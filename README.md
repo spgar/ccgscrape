@@ -1,4 +1,4 @@
-# mtgscrape
+# ccgscrape
 
 This is some NodeJS that will scrape CCG deck information into JSON.
 
