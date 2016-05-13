@@ -42,9 +42,75 @@ describe('Deck Scraper', function() {
 
     describe('Scrape Hearthpwn deck', function() {
         it('scrapes a complete deck', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(249225)
+            .then(function(deckJSON) {
+                expect(deckJSON.deckName).to.equal('[S14] Combo Druid');
+                expect(deckJSON.playerName).to.equal('Alphros');
+                expect(deckJSON.deckClass).to.equal('Druid');
+                expect(deckJSON.craftingCost).to.equal(8940);
+                done();
+            });
+        });
+        it('identifies classes correctly - Druid', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(249225)
+            .then(function(deckJSON) {
+                expect(deckJSON.deckClass).to.equal('Druid');
+                done();
+            });
+        });
+        it('identifies classes correctly - Hunter', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(520585)
+            .then(function(deckJSON) {
+                expect(deckJSON.deckClass).to.equal('Hunter');
+                done();
+            });
+        });
+        it('identifies classes correctly - Mage', function(done) {
             scraper.scrapeHearthpwnDeckAsync(532040)
             .then(function(deckJSON) {
-                expect(deckJSON.deckName).to.equal('Reno Mage Rank 1 Legend NA');
+                expect(deckJSON.deckClass).to.equal('Mage');
+                done();
+            });
+        });
+        it('identifies classes correctly - Paladin', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(531690)
+            .then(function(deckJSON) {
+                expect(deckJSON.deckClass).to.equal('Paladin');
+                done();
+            });
+        });
+        it('identifies classes correctly - Priest', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(536503)
+            .then(function(deckJSON) {
+                expect(deckJSON.deckClass).to.equal('Priest');
+                done();
+            });
+        });
+        it('identifies classes correctly - Rogue', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(526029)
+            .then(function(deckJSON) {
+                expect(deckJSON.deckClass).to.equal('Rogue');
+                done();
+            });
+        });
+        it('identifies classes correctly - Shaman', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(535685)
+            .then(function(deckJSON) {
+                expect(deckJSON.deckClass).to.equal('Shaman');
+                done();
+            });
+        });
+        it('identifies classes correctly - Warlock', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(502782)
+            .then(function(deckJSON) {
+                expect(deckJSON.deckClass).to.equal('Warlock');
+                done();
+            });
+        });
+        it('identifies classes correctly - Warrior', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(529774)
+            .then(function(deckJSON) {
+                expect(deckJSON.deckClass).to.equal('Warrior');
                 done();
             });
         });

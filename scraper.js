@@ -107,15 +107,58 @@ module.exports = {
         request.getAsync(url)
         .spread(function (response, html) {
             var $ = cheerio.load(html);
-            var deckName;
-            var json = { deckName: '', playerName: '', cards: [] };
+            var deckName, playerName, deckClass, craftingCost;
+            var json = { deckName: '', playerName: '', deckClass: '', craftingCost: 0, cards: [] };
 
             // Extract the deck title
             $('.deck-title').filter(function() {
                 deckName = $(this).text();
             });
 
+            // Extract the player name
+            $('.user .name').filter(function() {
+                playerName = $(this).text();
+            });
+
+            // Extract the class
+            // How do we do this better?
+            $('.class-druid').filter(function() {
+                deckClass = 'Druid';
+            });
+            $('.class-hunter').filter(function() {
+                deckClass = 'Hunter';
+            });
+            $('.class-mage').filter(function() {
+                deckClass = 'Mage';
+            });
+            $('.class-paladin').filter(function() {
+                deckClass = 'Paladin';
+            });
+            $('.class-priest').filter(function() {
+                deckClass = 'Priest';
+            });
+            $('.class-rogue').filter(function() {
+                deckClass = 'Rogue';
+            });
+            $('.class-shaman').filter(function() {
+                deckClass = 'Shaman';
+            });
+            $('.class-warlock').filter(function() {
+                deckClass = 'Warlock';
+            });
+            $('.class-warrior').filter(function() {
+                deckClass = 'Warrior';
+            });
+
+            // Extract the crafting cost
+            $('.deck-details .craft-cost').filter(function() {
+                craftingCost = Number($(this).text());
+            });
+
             json.deckName = deckName;
+            json.playerName = playerName;
+            json.deckClass = deckClass;
+            json.craftingCost = craftingCost;
             callback(null, json);
         })
         .catch(function (error) {
