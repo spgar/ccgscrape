@@ -40,6 +40,16 @@ describe('Deck Scraper', function() {
         });
     });
 
+    describe('Scrape Hearthpwn deck', function() {
+        it('scrapes a complete deck', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(532040)
+            .then(function(deckJSON) {
+                expect(deckJSON.deckName).to.equal('Reno Mage Rank 1 Legend NA');
+                done();
+            });
+        });
+    });
+
     describe('Scrape SCG deck', function() {
         it('scrapes a complete deck', function(done) {
             scraper.scrapeSCGDeckAsync(97366)

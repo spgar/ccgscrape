@@ -101,6 +101,28 @@ module.exports = {
 
     addCard: addCard,
 
+    scrapeHearthpwnDeck: function(deckID, callback) {
+        // Create the URL
+        var url = 'http://www.hearthpwn.com/decks/' + deckID;
+        request.getAsync(url)
+        .spread(function (response, html) {
+            var $ = cheerio.load(html);
+            var deckName;
+            var json = { deckName: '', playerName: '', cards: [] };
+
+            // Extract the deck title
+            $('.deck-title').filter(function() {
+                deckName = $(this).text();
+            });
+
+            json.deckName = deckName;
+            callback(null, json);
+        })
+        .catch(function (error) {
+            callback(error, null);
+        });
+    },
+
     scrapeSCGDeckIDs: function(startDate, endDate, callback) {
         var deckIDs = [];
         processDeckIDPage(deckIDs, startDate, endDate, 0, function(deckIDs) {
