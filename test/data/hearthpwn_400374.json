@@ -1,0 +1,27 @@
+{
+  "deckName": "Dragonz'rilla",
+  "playerName": "lHlakai",
+  "deckClass": "Hunter",
+  "craftingCost": 9760,
+  "cards": [
+    { "name": "Arcane Shot", "quantity": 2 },
+    { "name": "Hunter's Mark", "quantity": 2 },
+    { "name": "King's Elekk", "quantity": 2 },
+    { "name": "Quick Shot", "quantity": 2 },
+    { "name": "Dreadscale", "quantity": 1 },
+    { "name": "Gahz'rilla", "quantity": 1 },
+    { "name": "Gladiator's Longbow", "quantity": 1 },
+    { "name": "Wild Pyromancer", "quantity": 2 },
+    { "name": "Acolyte of Pain", "quantity": 2 },
+    { "name": "Blackwing Technician", "quantity": 2 },
+    { "name": "Twilight Guardian", "quantity": 2 },
+    { "name": "Azure Drake", "quantity": 2 },
+    { "name": "Blackwing Corruptor", "quantity": 2 },
+    { "name": "Drakonid Crusher", "quantity": 2 },
+    { "name": "Chillmaw", "quantity": 1 },
+    { "name": "Rend Blackhand", "quantity": 1 },
+    { "name": "Chromaggus", "quantity": 1 },
+    { "name": "Alexstrasza", "quantity": 1 },
+    { "name": "Ysera", "quantity": 1 }
+  ]
+}

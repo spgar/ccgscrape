@@ -42,7 +42,7 @@ describe('Deck Scraper', function() {
     });
 
     describe('Scrape Hearthpwn deck', function() {
-        it('scrapes a complete deck', function(done) {
+        it('scrapes a complete deck - Druid', function(done) {
             scraper.scrapeHearthpwnDeckAsync(249225)
             .then(function(deckJSON) {
                 var testJSON = jsonfile.readFileSync('./test/data/hearthpwn_249225.json');
@@ -50,17 +50,11 @@ describe('Deck Scraper', function() {
                 done();
             });
         });
-        it('identifies classes correctly - Druid', function(done) {
-            scraper.scrapeHearthpwnDeckAsync(249225)
+        it('scrapes a complete deck - Hunter', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(400374)
             .then(function(deckJSON) {
-                expect(deckJSON.deckClass).to.equal('Druid');
-                done();
-            });
-        });
-        it('identifies classes correctly - Hunter', function(done) {
-            scraper.scrapeHearthpwnDeckAsync(520585)
-            .then(function(deckJSON) {
-                expect(deckJSON.deckClass).to.equal('Hunter');
+                var testJSON = jsonfile.readFileSync('./test/data/hearthpwn_400374.json');
+                expect(deckJSON).to.deep.equal(testJSON);
                 done();
             });
         });
