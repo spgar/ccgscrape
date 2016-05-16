@@ -18,6 +18,7 @@
         "cheerio"  : "latest",
         "bluebird" : "latest",
         "mocha"    : "latest",
-        "chai"     : "latest"
+        "chai"     : "latest",
+        "jsonfile" : "latest"
     }
 }
