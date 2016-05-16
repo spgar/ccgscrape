@@ -1,0 +1,24 @@
+{
+  "deckName": "MiracleMechMage (v.3.0)",
+  "playerName": "MrThreePik",
+  "deckClass": "Mage",
+  "craftingCost": 4840,
+  "cards": [
+    { "name": "Arcane Missiles", "quantity": 2 },
+    { "name": "Mana Wyrm", "quantity": 2 },
+    { "name": "Frostbolt", "quantity": 2 },
+    { "name": "Snowchugger", "quantity": 2 },
+    { "name": "Flamewaker", "quantity": 2 },
+    { "name": "Fireball", "quantity": 2 },
+    { "name": "Goblin Blastmage", "quantity": 2 },
+    { "name": "Archmage Antonidas", "quantity": 1 },
+    { "name": "Clockwork Gnome", "quantity": 2 },
+    { "name": "Cogmaster", "quantity": 2 },
+    { "name": "Annoy-o-Tron", "quantity": 2 },
+    { "name": "Mechwarper", "quantity": 2 },
+    { "name": "Spider Tank", "quantity": 2 },
+    { "name": "Mechanical Yeti", "quantity": 2 },
+    { "name": "Fel Reaver", "quantity": 2 },
+    { "name": "Dr. Boom", "quantity": 1 }
+  ]
+}

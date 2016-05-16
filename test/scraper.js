@@ -58,10 +58,11 @@ describe('Deck Scraper', function() {
                 done();
             });
         });
-        it('identifies classes correctly - Mage', function(done) {
-            scraper.scrapeHearthpwnDeckAsync(532040)
+        it('scrapes a complete deck - Mage', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(134111)
             .then(function(deckJSON) {
-                expect(deckJSON.deckClass).to.equal('Mage');
+                var testJSON = jsonfile.readFileSync('./test/data/hearthpwn_134111.json');
+                expect(deckJSON).to.deep.equal(testJSON);
                 done();
             });
         });
