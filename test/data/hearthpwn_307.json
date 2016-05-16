@@ -1,0 +1,26 @@
+{
+  "deckName": "Miracle Rogue",
+  "playerName": "LegacyDecks",
+  "deckClass": "Rogue",
+  "craftingCost": 6660,
+  "cards": [
+    { "name": "Backstab", "quantity": 2 },
+    { "name": "Preparation", "quantity": 2 },
+    { "name": "Shadowstep", "quantity": 2 },
+    { "name": "Cold Blood", "quantity": 2 },
+    { "name": "Conceal", "quantity": 1 },
+    { "name": "Deadly Poison", "quantity": 1 },
+    { "name": "Eviscerate", "quantity": 2 },
+    { "name": "Sap", "quantity": 2 },
+    { "name": "Shiv", "quantity": 2 },
+    { "name": "Edwin VanCleef", "quantity": 1 },
+    { "name": "Fan of Knives", "quantity": 2 },
+    { "name": "SI:7 Agent", "quantity": 2 },
+    { "name": "Blade Flurry", "quantity": 1 },
+    { "name": "Bloodmage Thalnos", "quantity": 1 },
+    { "name": "Earthen Ring Farseer", "quantity": 2 },
+    { "name": "Azure Drake", "quantity": 2 },
+    { "name": "Leeroy Jenkins", "quantity": 1 },
+    { "name": "Gadgetzan Auctioneer", "quantity": 2 }
+  ]
+}

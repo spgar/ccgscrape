@@ -66,45 +66,51 @@ describe('Deck Scraper', function() {
                 done();
             });
         });
-        it('identifies classes correctly - Paladin', function(done) {
-            scraper.scrapeHearthpwnDeckAsync(531690)
+        it('scrapes a complete deck - Paladin', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(309848)
             .then(function(deckJSON) {
-                expect(deckJSON.deckClass).to.equal('Paladin');
+                var testJSON = jsonfile.readFileSync('./test/data/hearthpwn_309848.json');
+                expect(deckJSON).to.deep.equal(testJSON);
                 done();
             });
         });
-        it('identifies classes correctly - Priest', function(done) {
-            scraper.scrapeHearthpwnDeckAsync(536503)
+        it('scrapes a complete deck - Priest', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(308694)
             .then(function(deckJSON) {
-                expect(deckJSON.deckClass).to.equal('Priest');
+                var testJSON = jsonfile.readFileSync('./test/data/hearthpwn_308694.json');
+                expect(deckJSON).to.deep.equal(testJSON);
                 done();
             });
         });
-        it('identifies classes correctly - Rogue', function(done) {
-            scraper.scrapeHearthpwnDeckAsync(526029)
+        it('scrapes a complete deck - Rogue', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(307)
             .then(function(deckJSON) {
-                expect(deckJSON.deckClass).to.equal('Rogue');
+                var testJSON = jsonfile.readFileSync('./test/data/hearthpwn_307.json');
+                expect(deckJSON).to.deep.equal(testJSON);
                 done();
             });
         });
-        it('identifies classes correctly - Shaman', function(done) {
-            scraper.scrapeHearthpwnDeckAsync(535685)
+        it('scrapes a complete deck - Shaman', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(308008)
             .then(function(deckJSON) {
-                expect(deckJSON.deckClass).to.equal('Shaman');
+                var testJSON = jsonfile.readFileSync('./test/data/hearthpwn_308008.json');
+                expect(deckJSON).to.deep.equal(testJSON);
                 done();
             });
         });
-        it('identifies classes correctly - Warlock', function(done) {
-            scraper.scrapeHearthpwnDeckAsync(502782)
+        it('scrapes a complete deck - Warlock', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(239855)
             .then(function(deckJSON) {
-                expect(deckJSON.deckClass).to.equal('Warlock');
+                var testJSON = jsonfile.readFileSync('./test/data/hearthpwn_239855.json');
+                expect(deckJSON).to.deep.equal(testJSON);
                 done();
             });
         });
-        it('identifies classes correctly - Warrior', function(done) {
-            scraper.scrapeHearthpwnDeckAsync(529774)
+        it('scrapes a complete deck - Warrior', function(done) {
+            scraper.scrapeHearthpwnDeckAsync(386427)
             .then(function(deckJSON) {
-                expect(deckJSON.deckClass).to.equal('Warrior');
+                var testJSON = jsonfile.readFileSync('./test/data/hearthpwn_386427.json');
+                expect(deckJSON).to.deep.equal(testJSON);
                 done();
             });
         });

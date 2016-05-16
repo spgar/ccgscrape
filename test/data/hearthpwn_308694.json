@@ -1,0 +1,24 @@
+{
+  "deckName": "Reynad's OP Dragon Priest",
+  "playerName": "Reynad",
+  "deckClass": "Priest",
+  "craftingCost": 3880,
+  "cards": [
+    { "name": "Northshire Cleric", "quantity": 2 },
+    { "name": "Power Word: Shield", "quantity": 2 },
+    { "name": "Twilight Whelp", "quantity": 2 },
+    { "name": "Shrinkmeister", "quantity": 2 },
+    { "name": "Wyrmrest Agent", "quantity": 2 },
+    { "name": "Dark Cultist", "quantity": 2 },
+    { "name": "Shadow Word: Death", "quantity": 2 },
+    { "name": "Shadow Madness", "quantity": 2 },
+    { "name": "Holy Nova", "quantity": 2 },
+    { "name": "Cabal Shadow Priest", "quantity": 2 },
+    { "name": "Blackwing Technician", "quantity": 2 },
+    { "name": "Dragonkin Sorcerer", "quantity": 1 },
+    { "name": "Twilight Guardian", "quantity": 2 },
+    { "name": "Azure Drake", "quantity": 2 },
+    { "name": "Blackwing Corruptor", "quantity": 2 },
+    { "name": "Chillmaw", "quantity": 1 }
+  ]
+}

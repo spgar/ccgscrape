@@ -1,0 +1,26 @@
+{
+  "deckName": "[S17] TGT Midrange Totem Shaman",
+  "playerName": "x1phias",
+  "deckClass": "Shaman",
+  "craftingCost": 4280,
+  "cards": [
+    { "name": "Earth Shock", "quantity": 1 },
+    { "name": "Rockbiter Weapon", "quantity": 2 },
+    { "name": "Flametongue Totem", "quantity": 2 },
+    { "name": "Totem Golem", "quantity": 2 },
+    { "name": "Hex", "quantity": 2 },
+    { "name": "Lightning Storm", "quantity": 2 },
+    { "name": "Mana Tide Totem", "quantity": 1 },
+    { "name": "Tuskarr Totemic", "quantity": 2 },
+    { "name": "Bloodlust", "quantity": 1 },
+    { "name": "Thunder Bluff Valiant", "quantity": 2 },
+    { "name": "Fire Elemental", "quantity": 2 },
+    { "name": "Al'Akir the Windlord", "quantity": 1 },
+    { "name": "Zombie Chow", "quantity": 2 },
+    { "name": "Haunted Creeper", "quantity": 2 },
+    { "name": "Defender of Argus", "quantity": 1 },
+    { "name": "Piloted Shredder", "quantity": 2 },
+    { "name": "Azure Drake", "quantity": 2 },
+    { "name": "Dr. Boom", "quantity": 1 }
+  ]
+}

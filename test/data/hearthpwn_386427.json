@@ -1,0 +1,31 @@
+{
+  "deckName": "Top 8 Control FULL Guide by MarioHS",
+  "playerName": "MarioHS",
+  "deckClass": "Warrior",
+  "craftingCost": 15160,
+  "cards": [
+    { "name": "Execute", "quantity": 2 },
+    { "name": "Shield Slam", "quantity": 2 },
+    { "name": "Armorsmith", "quantity": 1 },
+    { "name": "Fiery War Axe", "quantity": 2 },
+    { "name": "Revenge", "quantity": 1 },
+    { "name": "Slam", "quantity": 2 },
+    { "name": "Bash", "quantity": 1 },
+    { "name": "Fierce Monkey", "quantity": 1 },
+    { "name": "Shield Block", "quantity": 1 },
+    { "name": "Death's Bite", "quantity": 2 },
+    { "name": "Brawl", "quantity": 2 },
+    { "name": "Shieldmaiden", "quantity": 1 },
+    { "name": "Grommash Hellscream", "quantity": 1 },
+    { "name": "Piloted Shredder", "quantity": 1 },
+    { "name": "Big Game Hunter", "quantity": 1 },
+    { "name": "Harrison Jones", "quantity": 1 },
+    { "name": "Sludge Belcher", "quantity": 2 },
+    { "name": "Justicar Trueheart", "quantity": 1 },
+    { "name": "Sylvanas Windrunner", "quantity": 1 },
+    { "name": "Baron Geddon", "quantity": 1 },
+    { "name": "Dr. Boom", "quantity": 1 },
+    { "name": "Alexstrasza", "quantity": 1 },
+    { "name": "Ysera", "quantity": 1 }
+  ]
+}

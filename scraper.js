@@ -112,13 +112,13 @@ module.exports = {
             var json = { deckName: '', playerName: '', deckClass: '', craftingCost: 0, cards: [] };
 
             // Extract the deck title
-            $('.deck-title').filter(function() {
+            $('.deck-info .deck-title').filter(function() {
                 deckName = $(this).text();
             });
 
             // Extract the player name
             $('.user .name').filter(function() {
-                playerName = $(this).text();
+                playerName = $(this).text().replace(/(\r\n|\n|\r)/gm, '').trim();
             });
 
             // Extract the class

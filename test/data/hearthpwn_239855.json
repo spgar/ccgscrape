@@ -1,0 +1,26 @@
+{
+  "deckName": "[S21] Sigma's Midrange Zoo Streak to Legend! (G...",
+  "playerName": "sigmasrb",
+  "deckClass": "Warlock",
+  "craftingCost": 5940,
+  "cards": [
+    { "name": "Flame Imp", "quantity": 1 },
+    { "name": "Power Overwhelming", "quantity": 2 },
+    { "name": "Voidwalker", "quantity": 2 },
+    { "name": "Dark Peddler", "quantity": 2 },
+    { "name": "Imp Gang Boss", "quantity": 2 },
+    { "name": "Void Terror", "quantity": 1 },
+    { "name": "Imp-losion", "quantity": 2 },
+    { "name": "Voidcaller", "quantity": 2 },
+    { "name": "Doomguard", "quantity": 2 },
+    { "name": "Mal'Ganis", "quantity": 1 },
+    { "name": "Abusive Sergeant", "quantity": 2 },
+    { "name": "Haunted Creeper", "quantity": 2 },
+    { "name": "Knife Juggler", "quantity": 2 },
+    { "name": "Nerubian Egg", "quantity": 2 },
+    { "name": "Ironbeak Owl", "quantity": 1 },
+    { "name": "Defender of Argus", "quantity": 2 },
+    { "name": "Sylvanas Windrunner", "quantity": 1 },
+    { "name": "Dr. Boom", "quantity": 1 }
+  ]
+}

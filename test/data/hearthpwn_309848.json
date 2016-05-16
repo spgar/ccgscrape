@@ -1,0 +1,28 @@
+{
+  "deckName": "Legend Secret Pally",
+  "playerName": "PurpleLum",
+  "deckClass": "Paladin",
+  "craftingCost": 5640,
+  "cards": [
+    { "name": "Avenge", "quantity": 2 },
+    { "name": "Competitive Spirit", "quantity": 1 },
+    { "name": "Noble Sacrifice", "quantity": 2 },
+    { "name": "Shielded Minibot", "quantity": 2 },
+    { "name": "Aldor Peacekeeper", "quantity": 1 },
+    { "name": "Coghammer", "quantity": 1 },
+    { "name": "Muster for Battle", "quantity": 2 },
+    { "name": "Blessing of Kings", "quantity": 1 },
+    { "name": "Consecration", "quantity": 2 },
+    { "name": "Truesilver Champion", "quantity": 2 },
+    { "name": "Quartermaster", "quantity": 1 },
+    { "name": "Mysterious Challenger", "quantity": 1 },
+    { "name": "Lay on Hands", "quantity": 1 },
+    { "name": "Tirion Fordring", "quantity": 1 },
+    { "name": "Haunted Creeper", "quantity": 2 },
+    { "name": "Knife Juggler", "quantity": 2 },
+    { "name": "Piloted Shredder", "quantity": 2 },
+    { "name": "Loatheb", "quantity": 1 },
+    { "name": "Sludge Belcher", "quantity": 2 },
+    { "name": "Dr. Boom", "quantity": 1 }
+  ]
+}
