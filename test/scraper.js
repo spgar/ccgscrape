@@ -48,6 +48,27 @@ describe('Deck Scraper', function() {
                 expect(deckJSON.playerName).to.equal('Alphros');
                 expect(deckJSON.deckClass).to.equal('Druid');
                 expect(deckJSON.craftingCost).to.equal(8940);
+                expect(deckJSON.cards).to.deep.equal([
+                    { name: 'Innervate', quantity: 2 },
+                    { name: 'Wild Growth', quantity: 2 },
+                    { name: 'Wrath', quantity: 2 },
+                    { name: 'Savage Roar', quantity: 2 },
+                    { name: 'Keeper of the Grove', quantity: 2 },
+                    { name: 'Swipe', quantity: 2 },
+                    { name: 'Druid of the Claw', quantity: 2 },
+                    { name: 'Force of Nature', quantity: 2 },
+                    { name: 'Ancient of Lore', quantity: 2 },
+                    { name: 'Shade of Naxxramas', quantity: 2 },
+                    { name: 'Piloted Shredder', quantity: 2 },
+                    { name: 'Azure Drake', quantity: 1 },
+                    { name: 'Big Game Hunter', quantity: 1 },
+                    { name: 'Harrison Jones', quantity: 1 },
+                    { name: 'Sludge Belcher', quantity: 1 },
+                    { name: 'Emperor Thaurissan', quantity: 1 },
+                    { name: 'Sylvanas Windrunner', quantity: 1 },
+                    { name: 'Dr. Boom', quantity: 1 },
+                    { name: 'Ragnaros the Firelord', quantity: 1 }
+                ]);
                 done();
             });
         });

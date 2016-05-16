@@ -108,6 +108,7 @@ module.exports = {
         .spread(function (response, html) {
             var $ = cheerio.load(html);
             var deckName, playerName, deckClass, craftingCost;
+            var cards = [];
             var json = { deckName: '', playerName: '', deckClass: '', craftingCost: 0, cards: [] };
 
             // Extract the deck title
@@ -155,10 +156,25 @@ module.exports = {
                 craftingCost = Number($(this).text());
             });
 
+            $('.class-listing .col-name, .neutral-listing .col-name').each(function(i, e) {
+                var entry = $(this).text().replace(/(\r\n|\n|\r)/gm, '').trim();
+                // Strip newlines and trim leading/trailing whitepsace.
+                // Now in form: Lightning Bolt     × 1
+                var cardText = entry.match(/(.+)\s\s\s\s\s×\s(1|2)/);
+
+                if (cardText) {
+                    var card = {};
+                    card.name = cardText[1];
+                    card.quantity = Number(cardText[2]);
+                    cards.push(card);
+                }
+            });
+
             json.deckName = deckName;
             json.playerName = playerName;
             json.deckClass = deckClass;
             json.craftingCost = craftingCost;
+            json.cards = cards;
             callback(null, json);
         })
         .catch(function (error) {
