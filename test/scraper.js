@@ -120,54 +120,9 @@ describe('Deck Scraper', function() {
         it('scrapes a complete deck', function(done) {
             scraper.scrapeSCGDeckAsync(97366)
             .then(function(deckJSON) {
-                expect(deckJSON.deckName).to.equal('U/B Tezzeret');
-                expect(deckJSON.playerName).to.equal('Will Hutchins');
-                expect(deckJSON.place).to.equal(6);
-                expect(deckJSON.date).to.deep.equal(new Date(2015, 11, 27));
-                expect(deckJSON.cards).to.deep.equal([
-                    { name: 'Baleful Strix', main: 4, side: 0 },
-                    { name: 'Phyrexian Revoker', main: 1, side: 0 },
-                    { name: 'Trinket Mage', main: 1, side: 0 },
-                    { name: 'Ashiok, Nightmare Weaver', main: 2, side: 0 },
-                    { name: 'Jace, the Mind Sculptor', main: 2, side: 0 },
-                    { name: 'Tezzeret, Agent of Bolas', main: 4, side: 0 },
-                    { name: 'Seat of the Synod', main: 1, side: 0 },
-                    { name: 'Island', main: 3, side: 0 },
-                    { name: 'Swamp', main: 1, side: 0 },
-                    { name: 'Ancient Tomb', main: 3, side: 0 },
-                    { name: 'City of Traitors', main: 4, side: 0 },
-                    { name: 'Darkslick Shores', main: 1, side: 0 },
-                    { name: 'Darkwater Catacombs', main: 1, side: 0 },
-                    { name: 'Polluted Delta', main: 4, side: 0 },
-                    { name: 'Underground Sea', main: 2, side: 0 },
-                    { name: 'Academy Ruins', main: 1, side: 0 },
-                    { name: 'Urborg, Tomb of Yawgmoth', main: 1, side: 0 },
-                    { name: 'Chalice of the Void', main: 4, side: 0 },
-                    { name: 'Dimir Signet', main: 1, side: 0 },
-                    { name: 'Engineered Explosives', main: 1, side: 2 },
-                    { name: 'Ensnaring Bridge', main: 2, side: 0 },
-                    { name: 'Mox Diamond', main: 2, side: 0 },
-                    { name: 'Nihil Spellbomb', main: 1, side: 0 },
-                    { name: 'Sword of the Meek', main: 1, side: 0 },
-                    { name: 'Talisman of Dominance', main: 1, side: 0 },
-                    { name: 'Thopter Foundry', main: 2, side: 0 },
-                    { name: 'Force of Will', main: 3, side: 0 },
-                    { name: 'Thirst For Knowledge', main: 1, side: 0 },
-                    { name: 'Toxic Deluge', main: 2, side: 0 },
-                    { name: 'Transmute Artifact', main: 3, side: 0 },
-                    { name: 'Cursed Totem', main: 0, side: 1 },
-                    { name: 'Grafdigger\'s Cage', main: 0, side: 1 },
-                    { name: 'Pithing Needle', main: 0, side: 1 },
-                    { name: 'Staff of Nin', main: 0, side: 1 },
-                    { name: 'Trinisphere', main: 0, side: 1 },
-                    { name: 'Tsabo\'s Web', main: 0, side: 1 },
-                    { name: 'Guardian Beast', main: 0, side: 1 },
-                    { name: 'Notion Thief', main: 0, side: 1 },
-                    { name: 'Dread of Night', main: 0, side: 1 },
-                    { name: 'Flusterstorm', main: 0, side: 2 },
-                    { name: 'Surgical Extraction', main: 0, side: 1 },
-                    { name: 'Massacre', main: 0, side: 1 }
-                ]);
+                var testJSON = jsonfile.readFileSync('./test/data/scg_97366.json');
+                testJSON.date = new Date(testJSON.date); // What's the better way to do this?
+                expect(deckJSON).to.deep.equal(testJSON);
                 done();
             });
         });
